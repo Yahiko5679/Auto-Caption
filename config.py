@@ -32,16 +32,16 @@ class Rkn_Botz(object):
     PORT = int(os.environ.get("PORT", "8080"))
 
     # Force subscribe channel username (without @) (only public chats username required)
-    FORCE_SUB = os.environ.get("FORCE_SUB", "Rkn_Botz")
+    FORCE_SUB = os.environ.get("FORCE_SUB", "MythicBots")
 
     # Database config (required)
-    DB_NAME = os.environ.get("DB_NAME", "AutoCaption_V05_Bot")
+    DB_NAME = os.environ.get("DB_NAME", "")
     DB_URL = os.environ.get("DB_URL", "")
 
     # Default caption (with safe fallback)
     DEFAULT_CAPTION = os.environ.get(
         "DEFAULT_CAPTION",
-        "<b><a href='https://t.me/Rkn_Botz'>{file_name} Main Telegram Channel: @Rkn_Bots_Updates</a></b>"
+        "<b><a href='https://t.me/New_Anime_Hindi_Dub_Series'>{file_name} Main Telegram Channel: @New_Anime_Hindi_Dub_Series</a></b>"
     )
 
     # Sticker ID default
@@ -51,7 +51,7 @@ class Rkn_Botz(object):
     )
 
     # Admin ID (single integer)
-    ADMIN = int(os.environ.get('ADMIN', '5960922591'))  # Yahan default ko apne Telegram User ID se replace karo
+    ADMIN = int(os.environ.get('ADMIN', '6617544956'))  # Yahan default ko apne Telegram User ID se replace karo
 
 # ————
 # End of file
