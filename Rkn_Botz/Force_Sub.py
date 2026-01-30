@@ -43,7 +43,7 @@ class ForceSubCheck:
 
 
 # 📩 Handler for blocked users / unsubscribed
-@Client.on_message(filters.private & filters.create(ForceSubCheck(Config.FORCE_SUB)))
+@Client.on_message(filters.private & filters.create(ForceSubCheck(Rkn_Botz.FORCE_SUB)))
 async def handle_force_sub(client: Client, message: Message):
     user_id = message.from_user.id
     chat_link = f"https://t.me/{Config.FORCE_SUB.lstrip('@')}"
