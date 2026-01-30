@@ -51,7 +51,7 @@ class Rkn_Botz(object):
     )
 
     # Admin ID (single integer)
-    ADMIN = int(os.environ.get('ADMIN', '6617544956'))  # Yahan default ko apne Telegram User ID se replace karo
+    ADMIN = list(map(int, os.environ.get("ADMIN", "6617544956").split()))  # Yahan default ko apne Telegram User ID se replace karo
 
 # ————
 # End of file
