@@ -1,40 +1,29 @@
-# AutoCaptionBot by RknDeveloper
-# Copyright (c) 2024 RknDeveloper
-# Licensed under the MIT License
-# https://github.com/RknDeveloper/Rkn-AutoCaptionBot/blob/main/LICENSE
-# Please retain this credit when using or forking this code.
-
-# Developer Contacts:
-# Telegram: @RknDeveloperr
-# Updates Channel: @Rkn_Bots_Updates & @Rkn_Botz
-# Special Thanks To: @ReshamOwner
-# Update Channels: @Digital_Botz & @DigitalBotz_Support
-
-# ⚠️ Please do not remove this credit!
-
 from aiohttp import web
+import asyncio
+from config import Rkn_Botz
 
 Rkn_AutoCaptionBot = web.RouteTableDef()
 
+
 @Rkn_AutoCaptionBot.get("/", allow_head=True)
 async def root_route_handler(request):
-    return web.json_response("Rkn_AutoCaptionBot")
-
-async def web_server():
-    web_app = web.Application(client_max_size=30000000)
-    web_app.add_routes(Rkn_AutoCaptionBot)
-    return web_app
+    return web.json_response(
+        {"status": "ok", "bot": "Rkn_AutoCaptionBot"}
+    )
 
 
-# ————
-# End of file
-# Original author: @RknDeveloperr
-# GitHub: https://github.com/RknDeveloper
+async def start_web_server():
+    app = web.Application(client_max_size=30_000_000)
+    app.add_routes(Rkn_AutoCaptionBot)
 
-# Developer Contacts:
-# Telegram: @RknDeveloperr
-# Updates Channel: @Rkn_Bots_Updates & @Rkn_Botz
-# Special Thanks To: @ReshamOwner
-# Update Channels: @Digital_Botz & @DigitalBotz_Support
+    runner = web.AppRunner(app)
+    await runner.setup()
 
-# ⚠️ Please do not remove this credit!
+    site = web.TCPSite(
+        runner,
+        host="0.0.0.0",
+        port=Rkn_Botz.PORT
+    )
+    await site.start()
+
+    print(f"🌐 Web server running on port {Rkn_Botz.PORT}")
