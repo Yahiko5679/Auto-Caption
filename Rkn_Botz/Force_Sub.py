@@ -16,7 +16,7 @@
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.errors import UserNotParticipant
-from config import Rkn_Botz
+from Config import Rkn_Botz
 from .database import rkn_botz
 
 # 🧠 Async callable filter class
