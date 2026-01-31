@@ -1,19 +1,50 @@
-from pyrogram import filters
+from pyrogram import types
+from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
-from bot import Bot
-from keyboards import start_buttons
+from Rkn_Botz.keyboards import start_buttons
 
-@Bot.on_callback_query(filters.regex("^help_cb$"))
-async def help_callback(_, query: CallbackQuery):
+
+def start_buttons():
+    return types.InlineKeyboardMarkup(
+        [
+            [
+                types.InlineKeyboardButton(
+                    "📢 Main Channel",
+                    url="https://t.me/Rkn_Bots_Updates"
+                ),
+                types.InlineKeyboardButton(
+                    "❓ Help Group",
+                    url="https://t.me/Rkn_Bots_Support"
+                )
+            ],
+            [
+                types.InlineKeyboardButton(
+                    "🆘 Help",
+                    callback_data="help_cb"
+                )
+            ],
+            [
+                types.InlineKeyboardButton(
+                    "🔥 Source Code",
+                    url="https://github.com/RknDeveloper/Rkn-AutoCaptionBot"
+                )
+            ]
+        ]
+    )
+
+
+# Callback handler of help [help_cb]
+@Client.on_callback_query(filters.regex("^help_cb$"))
+async def help_callback(client, query: CallbackQuery):
     await query.message.edit_text(
         """
 🆘 <b>Help Guide</b>
 
-📌 Just send media  
-📌 Caption added automatically  
-📌 Works best in private chat  
+📌 Send media  
+📌 Bot adds caption  
+📌 Best in private chat  
 
-Need support?
+Need more?
 Join help group 👇
         """,
         reply_markup=start_buttons(),
