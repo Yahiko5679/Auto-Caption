@@ -85,12 +85,30 @@ async def start_cmd(client, message):
         ),
         reply_markup=types.InlineKeyboardMarkup(
             [
+                # 🔝 Top row: Add me in channel
                 [
-                    types.InlineKeyboardButton("📢 Main Channel", url="https://t.me/MythicBots"),
-                    types.InlineKeyboardButton("❓ Help Group", url="https://t.me/+SARTthPIKCcxZTc1")
+                    types.InlineKeyboardButton(
+                        "⇆ ᴀᴅᴅ ᴍᴇ ɪɴ ᴄʜᴀɴɴᴇʟ ⇆",
+                        url=f"https://t.me/{MythicBotz.BOT_USERNAME}?startchannel=true"
+                    )
                 ],
+                # 2nd row: Main channel + Help group
                 [
-                    types.InlineKeyboardButton("Source Code 🔥", url="https://t.me/VoidXTora")
+                    types.InlineKeyboardButton(
+                        "📢 Main Channel",
+                        url="https://t.me/MythicBots"
+                    ),
+                    types.InlineKeyboardButton(
+                        "❓ Help Group",
+                        url="https://t.me/+SARTthPIKCcxZTc1"
+                    )
+                ],
+                # 3rd row: Source code
+                [
+                    types.InlineKeyboardButton(
+                        "Source Code 🔥",
+                        url="https://t.me/VoidXTora"
+                    )
                 ]
             ]
         )
