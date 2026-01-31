@@ -1,6 +1,6 @@
 from pyrogram import Client, filters, errors, types
 from config import Rkn_Botz
-from .database import rkn_botz
+from .database import rkn_botz, MythicBotz
 import asyncio, time, re, os, sys
 
 
