@@ -135,7 +135,7 @@ async def start_cmd(client, message):
                 url="https://t.me/VoidXTora"
             )
         ]
-    ]
+    ])
 )
 
 # this command works on channels only 
