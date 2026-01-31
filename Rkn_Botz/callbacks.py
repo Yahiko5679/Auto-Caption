@@ -1,7 +1,7 @@
 from pyrogram import types
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
-from config import MythicBots
+from config import MythicBotz 
 
 
 def start_buttons():
@@ -37,7 +37,7 @@ def start_buttons():
 @Client.on_callback_query(filters.regex("^help_cb$"))
 async def help_callback(client, query: CallbackQuery):
     await query.message.edit_text(
-        MythicBots.HELP_TEXT,
+        MythicBotz.HELP_TEXT,
         reply_markup=start_buttons(),
         disable_web_page_preview=True
     )
