@@ -11,7 +11,11 @@ from .database import rkn_botz
 # ─────────────────────────────────────
 class ForceSubCheck:
     def __init__(self, channel: str):
-        self.channel = channel.lstrip("@") if channel else None
+        self.channel = channel.lstrip("@") if isinstance(channel, str) else channel
+
+        # Normalize admins once
+        admins = Rkn_Botz.ADMIN
+        self.admins = admins if isinstance(admins, list) else [admins]
 
     async def __call__(self, client: Client, message: Message) -> bool:
         if not message.from_user:
@@ -30,31 +34,33 @@ class ForceSubCheck:
             return False
 
         # 🔹 Skip OWNER & ADMINS
-        if user_id == Rkn_Botz.OWNER_ID or user_id in Rkn_Botz.ADMIN:
+        if user_id == Rkn_Botz.OWNER_ID or user_id in self.admins:
             return False
 
         try:
             member = await client.get_chat_member(self.channel, user_id)
 
-            # ✅ Allowed roles → NO force sub
+            # ✅ These users are ALLOWED
             if member.status in (
+                enums.ChatMemberStatus.MEMBER,
                 enums.ChatMemberStatus.ADMINISTRATOR,
-                enums.ChatMemberStatus.OWNER,
-                enums.ChatMemberStatus.MEMBER
+                enums.ChatMemberStatus.OWNER
             ):
                 return False
 
-            # ❌ Block if left or banned
-            return member.status in (
+            # ❌ These users must JOIN
+            if member.status in (
                 enums.ChatMemberStatus.LEFT,
                 enums.ChatMemberStatus.BANNED
-            )
+            ):
+                return True
 
-        except UserNotParticipant:
-            return True  # Not joined → force sub
+            # Any other status → allow
+            return False
 
         except Exception:
-            return False  # Fail-open (do not block bot)
+            # Fail-open: never block bot on API errors
+            return False
 
 
 # ─────────────────────────────────────
