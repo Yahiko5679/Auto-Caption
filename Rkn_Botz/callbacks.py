@@ -2,6 +2,7 @@ from pyrogram import types
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
 from Rkn_Botz.keyboards import start_buttons
+from config import MythicBots
 
 
 def start_buttons():
@@ -37,16 +38,7 @@ def start_buttons():
 @Client.on_callback_query(filters.regex("^help_cb$"))
 async def help_callback(client, query: CallbackQuery):
     await query.message.edit_text(
-        """
-🆘 <b>Help Guide</b>
-
-📌 Send media  
-📌 Bot adds caption  
-📌 Best in private chat  
-
-Need more?
-Join help group 👇
-        """,
+        MythicBots.HELP_TEXT,
         reply_markup=start_buttons(),
         disable_web_page_preview=True
     )
