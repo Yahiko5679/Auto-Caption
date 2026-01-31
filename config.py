@@ -65,3 +65,48 @@ class Rkn_Botz(object):
 # Update Channels: @Digital_Botz & @DigitalBotz_Support
 
 # ⚠️ Please do not remove this credit!
+
+
+
+class MythicBots:
+    HELP_TEXT = """
+🆘 <b>Auto Caption Bot – Help</b>
+
+<b>📤 How to Use</b>
+• Send any video or document  
+• Bot will auto-generate caption  
+• Works best in private chat  
+
+<b>🧩 Available Variables</b>
+You can use these in caption formats 👇
+
+• <code>{episode}</code> – Episode number  
+• <code>{season}</code> – Season number  
+• <code>{quality}</code> – Video quality (720p, 1080p, etc.)  
+• <code>{year}</code> – Release year  
+• <code>{language}</code> – Audio language  
+• <code>{file_name}</code> – Original file name  
+• <code>{caption}</code> – Original caption text  
+• <code>{file_size}</code> – Media file size  
+• <code>{description}</code> – Custom description  
+
+<b>📝 Example Caption</b>
+<blockquote>
+🎬 {file_name}  
+━━━━━━━━━━━━━━  
+📺 Season: {season} | Ep: {episode}  
+🎧 Language: {language}  
+📀 Quality: {quality}  
+📅 Year: {year}  
+💾 Size: {file_size}  
+━━━━━━━━━━━━━━  
+{description}
+</blockquote>
+
+<b>⚙ Notes</b>
+• HTML tags are supported  
+• Variables auto-fill if available  
+• Missing data will be skipped  
+
+📌 Tip: Just upload & relax 😌
+"""
