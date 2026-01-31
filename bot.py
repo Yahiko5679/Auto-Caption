@@ -3,6 +3,17 @@ from pyrogram import Client
 from config import Rkn_Botz
 from Rkn_Botz.web_support import web_server
 
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("BotLog.txt"),
+        logging.StreamHandler()
+    ]
+)
+
 
 class Rkn_AutoCaptionBot(Client):
     def __init__(self):
