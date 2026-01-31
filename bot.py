@@ -17,34 +17,38 @@ class Rkn_AutoCaptionBot(Client):
         )
 
     async def start(self):
-    await super().start()
-    me = await self.get_me()
-    self.uptime = Rkn_Botz.BOT_UPTIME
-    self.force_channel = Rkn_Botz.FORCE_SUB
+        # 🔹 Start Pyrogram
+        await super().start()
 
-    if Rkn_Botz.FORCE_SUB:
-        try:
-            link = await self.export_chat_invite_link(Rkn_Botz.FORCE_SUB)
-            self.invitelink = link
-        except Exception as e:
-            print(e)
-            print("Make Sure Bot admin in force sub channel")
-            self.force_channel = None
+        me = await self.get_me()
+        self.uptime = Rkn_Botz.BOT_UPTIME
+        self.force_channel = Rkn_Botz.FORCE_SUB
 
-    # ✅ FIX: do NOT wrap in AppRunner again
-    await web_server()
+        # 🔹 Force Subscribe Link
+        if Rkn_Botz.FORCE_SUB:
+            try:
+                link = await self.export_chat_invite_link(Rkn_Botz.FORCE_SUB)
+                self.invitelink = link
+            except Exception as e:
+                print(e)
+                print("Make sure bot is admin in force sub channel")
+                self.force_channel = None
 
-    print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
+        # 🔹 Start Web Server (Render PORT)
+        await web_server()
 
-    admin_ids = Rkn_Botz.ADMIN
-    if isinstance(admin_ids, int):
-        admin_ids = [admin_ids]
+        print(f"{me.first_name} Is Started.....✨️")
 
-    for admin_id in admin_ids:
-        try:
-            await self.send_message(
-                admin_id,
-                f"**__{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**"
-            )
-        except Exception:
-            pass
+        # 🔹 Notify Admins
+        admin_ids = Rkn_Botz.ADMIN
+        if isinstance(admin_ids, int):
+            admin_ids = [admin_ids]
+
+        for admin_id in admin_ids:
+            try:
+                await self.send_message(
+                    admin_id,
+                    f"**__{me.first_name} Is Started.....✨️__**"
+                )
+            except Exception:
+                pass
