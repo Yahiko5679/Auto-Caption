@@ -1,4 +1,4 @@
-from pyrogram import Client, filters, enums
+"""from pyrogram import Client, filters, enums
 from pyrogram.enums import ChatAction, ChatMemberStatus
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.errors import UserNotParticipant
@@ -101,4 +101,4 @@ async def handle_force_sub(client: Client, message: Message):
         "**🔐 To use this bot, you must join our update channel first.**\n\n"
         "👉 Join the channel and then try again.",
         reply_markup=buttons
-    )
+    )"""
