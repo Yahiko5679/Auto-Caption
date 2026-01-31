@@ -69,15 +69,35 @@ class ForceSubCheck:
     )
 )
 async def handle_force_sub(client: Client, message: Message):
+    user_id = message.from_user.id
     channel = Rkn_Botz.FORCE_SUB.lstrip("@")
     chat_link = f"https://t.me/{channel}"
+
+    # Double-check membership before sending message
+    try:
+        member = await client.get_chat_member(channel, user_id)
+        if member.status in (
+            enums.ChatMemberStatus.MEMBER,
+            enums.ChatMemberStatus.ADMINISTRATOR,
+            enums.ChatMemberStatus.OWNER,
+            enums.ChatMemberStatus.CREATOR
+        ):
+            return  # User already joined → skip message
+        if member.status == enums.ChatMemberStatus.BANNED:
+            return await message.reply_text(
+                "**🚫 You are banned from using this bot.**\nContact admin if this is a mistake."
+            )
+    except UserNotParticipant:
+        pass  # Not joined → continue to send join message
+    except Exception:
+        return  # API error → fail-open, do nothing
 
     buttons = InlineKeyboardMarkup(
         [[InlineKeyboardButton("🔔 Join Update Channel", url=chat_link)]]
     )
 
-    return await message.reply_text(
+    await message.reply_text(
         "**🔐 To use this bot, you must join our update channel first.**\n\n"
-        "👉 Join the channel and then send your file again.",
+        "👉 Join the channel and then try again.",
         reply_markup=buttons
     )
