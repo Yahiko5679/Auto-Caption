@@ -79,14 +79,16 @@ async def start_cmd(client, message):
     await message.reply_photo(
         photo=Rkn_Botz.RKN_PIC,
         caption=(
-            f"<b>Hey {message.from_user.mention} 👋\n\n"
-            f"I'm an Auto Caption Bot.\n"
-            f"I auto-edit captions for media posted in channels."
-            f"""<code>/set_caption</code> – Set your custom caption
-<code>/delcaption</code> – Delete and use default caption"""
-            f"Note: Commands only work in channels where I'm admin."
+             f"""<b>Hey {message.from_user.mention} 👋
 
-            f"<blockquote>‣ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a herf="https://t.me/VoidXTora">ᴘʀɪʏᴀɴꜱʜᴜ</a></blockquote></b>"
+I'm an Auto Caption Bot.
+I auto-edit captions for media posted in channels.
+
+<code>/set_caption</code> – Set your custom caption
+<code>/delcaption</code> – Delete and use default caption
+
+Note: Commands only work in channels where I'm admin.
+<blockquote>‣ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href="https://t.me/VoidXTora">ᴘʀɪʏᴀɴꜱʜᴜ</a></blockquote></b>"""
         ),
         reply_markup=types.InlineKeyboardMarkup(
             [
