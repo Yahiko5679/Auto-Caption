@@ -14,7 +14,7 @@ class ForceSubCheck:
         # Remove @ if provided
         self.channel = channel.lstrip("@") if channel else None
 
-    async def __call__(self, _, client: Client, message: Message) -> bool:
+    async def __call__(self, client: Client, message: Message) -> bool:
         # Safety check
         if not message.from_user:
             return False
