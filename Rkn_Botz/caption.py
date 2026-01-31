@@ -116,11 +116,11 @@ async def start_cmd(client, message):
         [
             types.InlineKeyboardButton(
                 "📢 Main Channel",
-                url="https://t.me/Rkn_Bots_Updates"
+                url="https://t.me/MythicBots"
             ),
             types.InlineKeyboardButton(
                 "Help Group ❓",
-                url="https://t.me/Rkn_Bots_Support"
+                url="https://t.me/+SARTthPIKCcxZTc1"
             )
         ],
         [
@@ -132,7 +132,7 @@ async def start_cmd(client, message):
         [
             types.InlineKeyboardButton(
                 "Source Code 🔥",
-                url="https://github.com/RknDeveloper/Rkn-AutoCaptionBot"
+                url="https://t.me/VoidXTora"
             )
         ]
     ]
