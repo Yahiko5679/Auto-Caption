@@ -23,7 +23,7 @@ class Rkn_Botz(object):
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 
     # Start pic (default image link)
-    RKN_PIC = os.environ.get("RKN_PIC", "https://telegra.ph/file/21a8e96b45cd6ac4d3da6.jpg")
+    RKN_PIC = os.environ.get("RKN_PIC", "https://graph.org/file/fc40b362f9160e52b1ac8-76d6e6d95e9e27dad0.jpg")
 
     # Bot uptime (start time)
     BOT_UPTIME = time.time()
