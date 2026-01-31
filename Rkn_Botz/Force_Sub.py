@@ -11,42 +11,50 @@ from .database import rkn_botz
 # ─────────────────────────────────────
 class ForceSubCheck:
     def __init__(self, channel: str):
-        # Remove @ if provided
         self.channel = channel.lstrip("@") if channel else None
 
     async def __call__(self, client: Client, message: Message) -> bool:
-        # Safety check
         if not message.from_user:
             return False
 
         user_id = message.from_user.id
 
-        # Register user in database
+        # 🔹 Register user safely
         try:
             await rkn_botz.register_user(user_id)
         except Exception:
             pass
 
-        # If force sub not enabled
+        # 🔹 Force sub disabled
         if not self.channel:
+            return False
+
+        # 🔹 Skip OWNER & ADMINS
+        if user_id == Rkn_Botz.OWNER_ID or user_id in Rkn_Botz.ADMIN:
             return False
 
         try:
             member = await client.get_chat_member(self.channel, user_id)
 
-            # Block if user LEFT or is BANNED
+            # ✅ Allowed roles → NO force sub
+            if member.status in (
+                enums.ChatMemberStatus.ADMINISTRATOR,
+                enums.ChatMemberStatus.OWNER,
+                enums.ChatMemberStatus.MEMBER
+            ):
+                return False
+
+            # ❌ Block if left or banned
             return member.status in (
                 enums.ChatMemberStatus.LEFT,
                 enums.ChatMemberStatus.BANNED
             )
 
         except UserNotParticipant:
-            # Not joined → block
-            return True
+            return True  # Not joined → force sub
 
         except Exception:
-            # Any unknown error → allow bot to continue
-            return False
+            return False  # Fail-open (do not block bot)
 
 
 # ─────────────────────────────────────
