@@ -52,3 +52,9 @@ class Rkn_AutoCaptionBot(Client):
                 )
             except Exception:
                 pass
+
+    async def stop(self, *args):
+        await super().stop()
+        print("Bot Stopped 🙄")
+
+Rkn_AutoCaptionBot().run()
