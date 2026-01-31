@@ -17,44 +17,34 @@ class Rkn_AutoCaptionBot(Client):
         )
 
     async def start(self):
-        await super().start()
-        me = await self.get_me()
-        self.uptime = Rkn_Botz.BOT_UPTIME
-        self.force_channel = Rkn_Botz.FORCE_SUB
+    await super().start()
+    me = await self.get_me()
+    self.uptime = Rkn_Botz.BOT_UPTIME
+    self.force_channel = Rkn_Botz.FORCE_SUB
 
-        if Rkn_Botz.FORCE_SUB:
-            try:
-                link = await self.export_chat_invite_link(Rkn_Botz.FORCE_SUB)
-                self.invitelink = link
-            except Exception as e:
-                print(e)
-                print("Make Sure Bot admin in force sub channel")
-                self.force_channel = None
+    if Rkn_Botz.FORCE_SUB:
+        try:
+            link = await self.export_chat_invite_link(Rkn_Botz.FORCE_SUB)
+            self.invitelink = link
+        except Exception as e:
+            print(e)
+            print("Make Sure Bot admin in force sub channel")
+            self.force_channel = None
 
-        app = web.AppRunner(await web_server())
-        await app.setup()
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, Rkn_Botz.PORT).start()
+    # ✅ FIX: do NOT wrap in AppRunner again
+    await web_server()
 
-        print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
+    print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
 
-        # 🔥 ADMIN FIX (ONLY CHANGE)
-        admin_ids = Rkn_Botz.ADMIN
-        if isinstance(admin_ids, int):
-            admin_ids = [admin_ids]
+    admin_ids = Rkn_Botz.ADMIN
+    if isinstance(admin_ids, int):
+        admin_ids = [admin_ids]
 
-        for admin_id in admin_ids:
-            try:
-                await self.send_message(
-                    admin_id,
-                    f"**__{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**"
-                )
-            except Exception:
-                pass
-
-    async def stop(self, *args):
-        await super().stop()
-        print("Bot Stopped 🙄")
-
-
-Rkn_AutoCaptionBot().run()
+    for admin_id in admin_ids:
+        try:
+            await self.send_message(
+                admin_id,
+                f"**__{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**"
+            )
+        except Exception:
+            pass
