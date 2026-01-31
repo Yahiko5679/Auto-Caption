@@ -111,12 +111,32 @@ async def start_cmd(client, message):
             f"/delcaption – Delete and use default caption\n\n"
             f"Note: Commands only work in channels where I'm admin.</b>"
         ),
-        reply_markup=types.InlineKeyboardMarkup([
-            [types.InlineKeyboardButton("📢 Main Channel", url="https://t.me/Rkn_Bots_Updates")],
-            [types.InlineKeyboardButton("❓ Help Group", url="https://t.me/Rkn_Bots_Support")],
-            [types.InlineKeyboardButton("🔥 Source Code", url="https://github.com/RknDeveloper/Rkn-AutoCaptionBot")]
-        ])
-    )
+        reply_markup = types.InlineKeyboardMarkup(
+    [
+        [
+            types.InlineKeyboardButton(
+                "📢 Main Channel",
+                url="https://t.me/Rkn_Bots_Updates"
+            ),
+            types.InlineKeyboardButton(
+                "Help Group ❓",
+                url="https://t.me/Rkn_Bots_Support"
+            )
+        ],
+        [
+            types.InlineKeyboardButton(
+                "Help 📌",
+                callback_data="help_cb"
+            )
+        ],
+        [
+            types.InlineKeyboardButton(
+                "Source Code 🔥",
+                url="https://github.com/RknDeveloper/Rkn-AutoCaptionBot"
+            )
+        ]
+    ]
+)
 
 # this command works on channels only 
 @Client.on_message(filters.command(["set_caption", "setcap"]) & filters.channel)
