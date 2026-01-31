@@ -17,7 +17,7 @@ from config import Rkn_Botz
 from .database import rkn_botz
 import asyncio, time, re, os, sys
 
-@Client.on_message(filters.private & filters.user(Rkn_Botz.ADMIN) & filters.command("rknusers"))
+@Client.on_message(filters.private & filters.user(Rkn_Botz.ADMIN) & filters.command(["users", "status"]))
 async def show_user_stats(client, message):
     start = time.monotonic()
     rkn = await message.reply_text("🔍 Gathering bot statistics...")
@@ -119,7 +119,7 @@ async def start_cmd(client, message):
     )
 
 # this command works on channels only 
-@Client.on_message(filters.command("set_caption") & filters.channel)
+@Client.on_message(filters.command(["set_caption", "setcap"]) & filters.channel)
 async def set_caption(client, message):
     if len(message.command) < 2:
         return await message.reply("Usage: /set_caption <your caption>\nUse `{file_name}` or `{caption}`.")
@@ -137,7 +137,7 @@ async def set_caption(client, message):
 
 
 # this command works on channels only 
-@Client.on_message(filters.command(["delcaption", "del_caption", "delete_caption"]) & filters.channel)
+@Client.on_message(filters.command(["delcaption", "del_caption", "delete_caption", "delcap"]) & filters.channel)
 async def delete_caption(client, message):
     channel_id = message.chat.id
     result = await rkn_botz._channels_collection.delete_one({"channelId": channel_id})
