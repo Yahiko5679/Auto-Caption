@@ -12,7 +12,7 @@ async def root_route_handler(request):
     )
 
 
-async def start_web_server():
+async def web_server():
     app = web.Application(client_max_size=30_000_000)
     app.add_routes(Rkn_AutoCaptionBot)
 
