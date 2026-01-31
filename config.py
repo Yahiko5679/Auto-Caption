@@ -68,7 +68,7 @@ class Rkn_Botz(object):
 
 
 
-class MythicBots:
+class MythicBotz:
     HELP_TEXT = """
 🆘 <b>Auto Caption Bot – Help</b>
 
