@@ -110,3 +110,6 @@ You can use these in caption formats 👇
 
 📌 Tip: Just upload & relax 😌
 """
+
+# Bot settings
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "")  # without "@"
