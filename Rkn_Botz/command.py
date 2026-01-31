@@ -1,9 +1,9 @@
-from pyrogram import filters
+from pyrogram import Client, filters, errors, types
 from pyrogram.types import Message
 from bot import Bot
 from keyboards import start_buttons
 
-@Bot.on_message(filters.command("help") & filters.private)
+@Client.on_message(filters.command("help") & filters.private)
 async def help_cmd(_, message: Message):
     await message.reply_text(
         """
