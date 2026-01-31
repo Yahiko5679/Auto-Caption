@@ -7,9 +7,8 @@ Rkn_AutoCaptionBot = web.RouteTableDef()
 
 @Rkn_AutoCaptionBot.get("/", allow_head=True)
 async def root_route_handler(request):
-    return web.json_response(
-        {"Emilia tan [MythicBotz]"}
-    )
+    # ✅ Plain string JSON
+    return web.json_response("Emilia tan [Mythic Bot]")
 
 
 async def web_server():
