@@ -20,7 +20,7 @@ async def help_cmd(client, message: Message):
 @Client.on_message(filters.command("logs") & filters.user(Rkn_Botz.ADMIN))
 async def send_logs(client, message):
     """
-   # Send bot log file (Render / Local / VPS safe)
+    Send bot log file (Render / Local / VPS safe)
     """
 
     possible_logs = [
