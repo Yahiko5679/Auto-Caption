@@ -49,7 +49,7 @@ async def send_logs(client, message):
         "• logs.txt"
     )"""
 
-@Client.on_message(filters.command("logs") & filters.user(Config.ADMIN))
+@Client.on_message(filters.command("logs") & filters.user(Rkn_Botz.ADMIN))
 async def logs_cmd(client, message):
     try:
         with open("BotLog.txt", "r", encoding="utf-8", errors="ignore") as f:
