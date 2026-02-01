@@ -16,7 +16,7 @@ async def help_cmd(client, message: Message):
 
 
 
-
+"""
 @Client.on_message(filters.command("logs") & filters.user(Rkn_Botz.ADMIN))
 async def send_logs(client, message):
     """
@@ -47,4 +47,22 @@ async def send_logs(client, message):
         "• bot.log\n"
         "• app.log\n"
         "• logs.txt"
-    )
+    )"""
+
+@Client.on_message(filters.command("logs") & filters.user(Config.ADMIN))
+async def logs_cmd(client, message):
+    try:
+        with open("BotLog.txt", "r", encoding="utf-8", errors="ignore") as f:
+            data = f.read()
+
+        if not data.strip():
+            return await message.reply("⚠️ Log file is empty")
+
+        # Telegram text limit safe cut
+        await message.reply_text(
+            data[-4000:],
+            disable_web_page_preview=True
+        )
+
+    except Exception as e:
+        await message.reply(f"❌ Failed to send log:\n<code>{e}</code>")
