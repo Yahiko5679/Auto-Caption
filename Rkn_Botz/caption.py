@@ -154,6 +154,7 @@ async def del_caption(client, message):
 # 🔍 EXTRACTION HELPERS
 # =========================
 
+
 def _two(num):
     try:
         return f"{int(num):02d}"
@@ -164,20 +165,45 @@ def _two(num):
 def detect_season(text):
     if not text:
         return "Unknown"
-    m = re.search(r'\bS(?:eason)?[\s\-_:]*(\d{1,2})\b', text, re.I)
+
+    # ✅ Handle combined patterns like S03E03 / S3E3
+    m = re.search(
+        r'\bS(?:eason)?[\s\-_:]*(\d{1,2})(?=[\s\-_:]*E)',
+        text,
+        re.I
+    )
+    if m:
+        return _two(m.group(1))
+
+    # ✅ Normal season patterns: S01 / Season 1
+    m = re.search(
+        r'\bS(?:eason)?[\s\-_:]*(\d{1,2})(?!\d)',
+        text,
+        re.I
+    )
     return _two(m.group(1)) if m else "Unknown"
 
 
 def detect_episode(text):
     if not text:
         return "Unknown"
-    m = re.search(r'\bE(?:p|pisode)?[\s\-_:]*(\d{1,4})\b', text, re.I)
-    if m:
-        ep = m.group(1)
-        if len(ep) == 4 and ep.startswith(("19", "20")):
-            return "Unknown"
-        return _two(ep)
-    return "Unknown"
+
+    # ✅ Handles E03 / Ep 3 / Episode 12 / S03E03
+    m = re.search(
+        r'\bE(?:p|pisode)?[\s\-_:]*(\d{1,4})(?!\d)',
+        text,
+        re.I
+    )
+    if not m:
+        return "Unknown"
+
+    ep = m.group(1)
+
+    # ❌ Block years like E2021 / E2024
+    if len(ep) == 4 and ep.startswith(("19", "20")):
+        return "Unknown"
+
+    return _two(ep)
 
 
 def detect_year(text):
