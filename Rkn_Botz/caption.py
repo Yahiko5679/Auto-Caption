@@ -166,18 +166,18 @@ def detect_season(text):
     if not text:
         return "Unknown"
 
-    # ✅ Handle combined patterns like S03E03 / S3E3
+    # ✅ Handles: S1E26, S01E03, S1 E26
     m = re.search(
-        r'\bS(?:eason)?[\s\-_:]*(\d{1,2})(?=[\s\-_:]*E)',
+        r'S(?:eason)?[\s\-_:]*(\d{1,2})(?=\s*E)',
         text,
         re.I
     )
     if m:
         return _two(m.group(1))
 
-    # ✅ Normal season patterns: S01 / Season 1
+    # ✅ Handles: S1, Season 1
     m = re.search(
-        r'\bS(?:eason)?[\s\-_:]*(\d{1,2})(?!\d)',
+        r'\bS(?:eason)?[\s\-_:]*(\d{1,2})\b',
         text,
         re.I
     )
@@ -188,9 +188,9 @@ def detect_episode(text):
     if not text:
         return "Unknown"
 
-    # ✅ Handles E03 / Ep 3 / Episode 12 / S03E03
+    # ✅ Handles: E26, Ep26, Episode 26, S1E26
     m = re.search(
-        r'\bE(?:p|pisode)?[\s\-_:]*(\d{1,4})(?!\d)',
+        r'E(?:p|pisode)?[\s\-_:]*(\d{1,4})',
         text,
         re.I
     )
@@ -199,7 +199,7 @@ def detect_episode(text):
 
     ep = m.group(1)
 
-    # ❌ Block years like E2021 / E2024
+    # ❌ Block years like E2021 / E1999
     if len(ep) == 4 and ep.startswith(("19", "20")):
         return "Unknown"
 
